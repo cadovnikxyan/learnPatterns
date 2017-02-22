@@ -10,6 +10,11 @@ void Horseman::info()
 
 }
 
+int Horseman::getStreanght()
+{
+    return 2;
+}
+
 Horseman::~Horseman()
 {
 

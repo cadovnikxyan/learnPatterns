@@ -10,6 +10,11 @@ void Infantryman::info()
 
 }
 
+int Infantryman::getStreanght()
+{
+    return 3;
+}
+
 Infantryman::~Infantryman()
 {
 

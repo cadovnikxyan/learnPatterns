@@ -2,6 +2,7 @@
 #define WARRIOR_H
 #include <map>
 #include "logui.h"
+#include "composite.h"
 enum Warrior_ID {
     Infantryman_ID,
     Archer_ID,

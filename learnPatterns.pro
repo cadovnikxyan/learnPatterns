@@ -29,8 +29,10 @@ SOURCES += main.cpp\
     opengamecommand.cpp \
     savegamecommand.cpp \
     movegamecommand.cpp \
-    uiadapter.cpp \
-    adapter.cpp
+    bridge.cpp \
+    ui_bridge.cpp \
+    chainbase.cpp \
+    composite.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -48,9 +50,11 @@ HEADERS  += mainwindow.h \
     opengamecommand.h \
     savegamecommand.h \
     movegamecommand.h \
-    uiadapter.h \
-    adapter.h
+    bridge.h \
+    ui_bridge.h \
+    chainbase.h \
+    composite.h
 
 FORMS    += mainwindow.ui
-
+LIBS+= -lboost_system
 QMAKE_CXXFLAGS="-std=gnu++14"

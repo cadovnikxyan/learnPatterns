@@ -2,16 +2,14 @@
 #define ARCHER_H
 #include "warrior.h"
 
-class Archer : public Warrior
+class Archer : public Warrior,public Unit
 {
 public:
     Warrior* clone();
     void info();
+    virtual int getStreanght();
     ~Archer();
-    int attack=0;
-    int getAttack() const;
-    void setAttack(int value);
-    Archer(int at);
+    Archer();
 
 private:
     Archer(Dimmy);

@@ -1,17 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 #include <QString>
-#include "uiadapter.h"
+#include "ui_bridge.h"
 class Game
 {
 public:
-    Game(UIAdapter* adapter);
+    Game(UI_Bridge* adapter);
     void create();
     void open(const QString& file);
     void save (const QString& file);
     void move(const QString& move);
-    QString getPlayerInput(const QString& promt);
-    UIAdapter* ui;
+    UI_Bridge* ui;
 
 
 };

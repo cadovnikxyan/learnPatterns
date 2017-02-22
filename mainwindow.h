@@ -19,12 +19,17 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_OK_clicked();
-
-    void on_Game_clicked();
+    void on_Start_clicked();
 
 private:
     Ui::MainWindow *ui;
-};
+    void command();
+    void prototype();
+    void chain();
+    void composite();
+    void(MainWindow::*pattPtr)();
+    QVector<void(MainWindow::*)()> patterns;
 
+};
+CompositeUnit* createLegion();
 #endif // MAINWINDOW_H

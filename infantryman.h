@@ -2,14 +2,15 @@
 #define INFANTRYMAN_H
 #include "warrior.h"
 
-class Infantryman : public Warrior
+class Infantryman : public Warrior,public Unit
 {
 public:
     Warrior* clone();
     void info();
+    virtual int getStreanght();
     ~Infantryman();
-private:
     Infantryman();
+private:
     Infantryman(Dimmy);
     static Infantryman prototype;
 

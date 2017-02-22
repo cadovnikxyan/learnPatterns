@@ -10,6 +10,11 @@ void Swordman::info()
 
 }
 
+int Swordman::getStreanght()
+{
+    return 4;
+}
+
 Swordman::~Swordman()
 {
 

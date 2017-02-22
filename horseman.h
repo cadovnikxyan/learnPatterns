@@ -2,14 +2,15 @@
 #define HORSEMAN_H
 #include "warrior.h"
 
-class Horseman : public Warrior
+class Horseman : public Warrior,public Unit
 {
 public:
     Warrior* clone();
     void info();
+    virtual int getStreanght();
+    Horseman();
     ~Horseman();
 private:
-    Horseman();
     Horseman(Dimmy);
     static Horseman prototype;
 

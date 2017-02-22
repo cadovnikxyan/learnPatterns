@@ -2,10 +2,10 @@
 #define ADAPTER_H
 #include <QString>
 
-class Adapter
+class Bridge
 {
 public:
-    virtual ~Adapter();
+    virtual ~Bridge();
     virtual QString getInput()=0;
 };
 

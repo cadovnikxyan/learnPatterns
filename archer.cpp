@@ -10,24 +10,21 @@ void Archer::info()
 
 }
 
+int Archer::getStreanght()
+{
+ return 1;
+}
+
 Archer::~Archer()
 {
 }
 
-int Archer::getAttack() const
-{
-    return attack;
-}
-
-void Archer::setAttack(int value)
-{
-    attack = value;
-}
-
-Archer::Archer(int at):attack(at)
+Archer::Archer()
 {
 
 }
+
+
 
 Archer::Archer(Dimmy)
 {

@@ -1,5 +1,5 @@
 #include "warrior.h"
-
+#include <QDebug>
 
 Warrior::~Warrior()
 {
@@ -33,3 +33,4 @@ Registry &getRegistry()
     return instance;
 
 }
+

@@ -1,6 +1,6 @@
 #include "game.h"
 #include <QDebug>
-Game::Game(UIAdapter *adapter)
+Game::Game(UI_Bridge *adapter)
 {
     ui=adapter;
 }
@@ -27,10 +27,4 @@ void Game::move(const QString &move)
 {
     qDebug()<<"Game move "<<move;
     ui->output(QString("Game move ")+ move );
-}
-
-QString Game::getPlayerInput(const QString &promt)
-{
-
-    return QString(""); /*заглушка*/
 }
