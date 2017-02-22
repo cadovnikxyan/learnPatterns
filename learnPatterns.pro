@@ -32,7 +32,8 @@ SOURCES += main.cpp\
     bridge.cpp \
     ui_bridge.cpp \
     chainbase.cpp \
-    composite.cpp
+    composite.cpp \
+    templatemethod.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -53,7 +54,8 @@ HEADERS  += mainwindow.h \
     bridge.h \
     ui_bridge.h \
     chainbase.h \
-    composite.h
+    composite.h \
+    templatemethod.h
 
 FORMS    += mainwindow.ui
 LIBS+= -lboost_system

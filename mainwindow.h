@@ -27,6 +27,7 @@ private:
     void prototype();
     void chain();
     void composite();
+    void templateMethod();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

@@ -13,6 +13,8 @@
 
 #include "chainbase.h"
 
+#include "templatemethod.h"
+
 #include <functional>
 
 
@@ -35,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox->addItem("Компоновщик",3);
     patterns.push_back(&MainWindow::composite);
+
+    ui->comboBox->addItem("Шаблонный метод",4);
+    patterns.push_back(&MainWindow::templateMethod);
 }
 
 MainWindow::~MainWindow()
@@ -118,6 +123,22 @@ void MainWindow::composite()
     ui->listWidget->addItem(QString::number(army->getStreanght()));
     delete army;
     /*-----------------------*/
+}
+
+void MainWindow::templateMethod()
+{
+    /*Паттерн Шаблонный метод*/
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
+
+    TemplateMethodOne one(&adapter);
+    TemplateMethodTwo two(&adapter);
+    TemplateMethodThree three(&adapter);
+
+    QVector<TemplateMethodBase*> v = {&one,&two,&three};
+    for(auto t : v){
+        t->execute();
+    }
+    /*------------------------*/
 }
 
 CompositeUnit *createLegion()
