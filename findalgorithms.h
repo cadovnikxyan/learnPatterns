@@ -1,0 +1,6 @@
+#ifndef FINDALGORITHMS_H
+#define FINDALGORITHMS_H
+
+
+
+#endif // FINDALGORITHMS_H

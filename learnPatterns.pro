@@ -33,7 +33,14 @@ SOURCES += main.cpp\
     ui_bridge.cpp \
     chainbase.cpp \
     composite.cpp \
-    templatemethod.cpp
+    templatemethod.cpp \
+    decorator.cpp \
+    sortalgorithms.cpp \
+    findalgorithms.cpp \
+    node.cpp \
+    tree.cpp \
+    mainArch.cpp \
+    huffmanalgorithm.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -55,7 +62,13 @@ HEADERS  += mainwindow.h \
     ui_bridge.h \
     chainbase.h \
     composite.h \
-    templatemethod.h
+    templatemethod.h \
+    decorator.h \
+    sortalgorithms.h \
+    findalgorithms.h \
+    node.h \
+    tree.h \
+    huffmanalgorithm.h
 
 FORMS    += mainwindow.ui
 LIBS+= -lboost_system

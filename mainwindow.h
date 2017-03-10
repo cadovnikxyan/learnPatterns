@@ -5,6 +5,7 @@
 #include "warrior.h"
 #include "game.h"
 #include "command.h"
+#include "huffmanalgorithm.h"
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +29,8 @@ private:
     void chain();
     void composite();
     void templateMethod();
+    void decorator();
+    void archive();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

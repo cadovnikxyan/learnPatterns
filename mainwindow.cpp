@@ -40,6 +40,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox->addItem("Шаблонный метод",4);
     patterns.push_back(&MainWindow::templateMethod);
+
+    ui->comboBox->addItem("Декоратор",5);
+    patterns.push_back(&MainWindow::decorator);
+
+    ui->comboBox->addItem("Хаффман",6);
+    patterns.push_back(&MainWindow::archive);
 }
 
 MainWindow::~MainWindow()
@@ -139,6 +145,19 @@ void MainWindow::templateMethod()
         t->execute();
     }
     /*------------------------*/
+}
+
+void MainWindow::decorator()
+{
+
+}
+
+void MainWindow::archive()
+{
+    HuffmanAlgorithm* h = new HuffmanAlgorithm(this);
+    h->exec();
+    delete h;
+
 }
 
 CompositeUnit *createLegion()
