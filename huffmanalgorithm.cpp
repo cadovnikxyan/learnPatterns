@@ -42,7 +42,7 @@ void HuffmanAlgorithm::setInFileName()
 
 void HuffmanAlgorithm::archiving()
 {
-
+/*почти перевел на Qt*/
     QFile* file;
     QDataStream* instream;
     tree* t;
@@ -65,7 +65,7 @@ void HuffmanAlgorithm::archiving()
            for(auto n : x.second){
                buf |= x.second[n]<<(7-count++);
                if(count>7){
-                   instream->operator <<(buf);
+                   instream->operator<<(buf);
                    buf=0;
                    count= 0;
                }
@@ -73,6 +73,7 @@ void HuffmanAlgorithm::archiving()
        }
        file->close();
        delete file;
+       delete instream;
        t->printTree();
        delete t;
     }

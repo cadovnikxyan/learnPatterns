@@ -70,7 +70,7 @@ void readArchive(const char* afilepath, const char* ofilepath,tree* t){
 			if(p->getRnextNode()==nullptr && p->getLnextNode()==nullptr){
 					go<<p->getChar(); 
 					p=t->getRoot();
-				}  
+                }
 			count++;
 			if(count==8){
 				count=0;byte = F.get();
