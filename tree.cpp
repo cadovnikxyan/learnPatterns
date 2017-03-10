@@ -5,7 +5,7 @@
 tree::tree(map<char,int>& _dic){
 	
     for(auto it= _dic.begin();it!= _dic.end();++it){
-        _tree.push_back(new node<char>(it->first,it->second));
+        _tree.push_back(new Node<char>(it->first,it->second));
 	}
 		createTree(_tree);
 }
@@ -17,7 +17,7 @@ tree::tree(string* str){
 				dic[*its]++;				
 		}	
     for(auto it= dic.begin();it!= dic.end();++it){
-        _tree.push_back(new node<char>(it->first,it->second));
+        _tree.push_back(new Node<char>(it->first,it->second));
 	}
 	createTree(_tree);
 }
@@ -28,7 +28,7 @@ tree::tree(string&& str){
                 dic[*its]++;
         }
     for(auto it= dic.begin();it!= dic.end();++it){
-        _tree.push_back(new node<char>(it->first,it->second));
+        _tree.push_back(new Node<char>(it->first,it->second));
     }
     createTree(_tree);
 }
@@ -51,23 +51,23 @@ void tree::printTree(){
 
 struct MyCompare
 {
-    bool operator()(const node<char>* l, const node<char>* r) const{
-	 return l->getWeight() < r->getWeight();
+    bool operator()(const Node<char>* l, const Node<char>* r) const{
+	 return l->getHeight() < r->getHeight();
 	}
 };
 
-void tree::createTree(list<node<char>*>& __tree ){
+void tree::createTree(list<Node<char>*>& __tree ){
 	
 	while(__tree.size()!=1){
 		
 		__tree.sort(MyCompare());
 		
-        node<char>* l=__tree.front();
+        Node<char>* l=__tree.front();
 		__tree.pop_front();
-        node<char>* r=__tree.front();
+        Node<char>* r=__tree.front();
 		__tree.pop_front();
 		
-        node<char>* p= new node<char>(l,r);
+        Node<char>* p= new Node<char>(l,r);
 					
 		__tree.push_back(p);
 						
@@ -76,12 +76,12 @@ void tree::createTree(list<node<char>*>& __tree ){
 		buildCodeTable(root);					
 }
 
-node<char>* tree::getRoot()const{
+Node<char>* tree::getRoot()const{
 	return this->root;
 }
 
 
-void tree::buildCodeTable(node<char> *_root){
+void tree::buildCodeTable(Node<char> *_root){
 	
     if(_root->getLnextNode() != nullptr){
 		code.push_back(0);
@@ -92,7 +92,7 @@ void tree::buildCodeTable(node<char> *_root){
 		buildCodeTable(_root->getRnextNode());
 	}
     if(_root->getLnextNode() == nullptr && _root->getRnextNode() == nullptr){
-        tcode[_root->getChar()]=code;
+        tcode[_root->getData()]=code;
 	}		
 		code.pop_back();
 }

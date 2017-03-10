@@ -7,6 +7,7 @@ class Unit
 public:
     virtual int getStreanght()=0;
     virtual CompositeUnit* getComposite();
+    virtual ~Unit();
 };
 
 class CompositeUnit:public Unit{

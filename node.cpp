@@ -1,51 +1,69 @@
 #include "node.h"
 
 template<class T>
-node<T>::node(node<T>* l, node<T>* r):lnext(l),rnext(r){
-	this->weight=l->getWeight()+r->getWeight();
-    this->data=0;
+Node<T>::Node(Node<T>* l, Node<T>* r):lnext(l),rnext(r)
+  ,height(l->getHeight()+r->getHeight()),data(0)
+{
+
 }
 template<class T>
-node<T>::node(T s, int _weight):lnext(nullptr),rnext(nullptr){
-    this->data=s;
-	this->weight=_weight;
+Node<T>::Node(T s, int _height):lnext(nullptr),rnext(nullptr)
+  ,data(s),height(_height)
+{
+
+}
+
+template<class T>
+Node<T>::Node(T s, int _height, int _key):lnext(nullptr),rnext(nullptr)
+  ,height(_height),key(key)
+{
+
+}
+
+
+template<class T>
+Node<T>::Node():lnext(nullptr),rnext(nullptr)
+  ,data(0),height(0)
+{
+
 }
 template<class T>
-node<T>::node():lnext(nullptr),rnext(nullptr){
-    this->data=0;
-	this->weight=0;
-}
-template<class T>
-node<T>::~node(){
+Node<T>::~Node(){
 	
 }
 template<class T>
-node<T>* node<T>::getLnextNode() const{
+Node<T>* Node<T>::getLnextNode() const{
 	return this->lnext;
 }
 template<class T>
-node<T>* node<T>::getRnextNode() const{
+Node<T>* Node<T>::getRnextNode() const{
 	return this->rnext;
 }
 template<class T>
-void node<T>::setLNext(node<T>* n){
+void Node<T>::setLNext(Node<T>* n){
 	this->lnext=n;
 }
 template<class T>
-void node<T>::setRNext(node<T>* n){
+void Node<T>::setRNext(Node<T>* n){
 	this->rnext=n;
 }
 
 template<class T>
-void node<T>::setData(T* s){
+void Node<T>::setData(T* s){
     this->data=(*s);
 }
 
 template<class T>
-int node<T>::getWeight()const{
-	return this->weight;
+void Node<T>::setHeight(int h)
+{
+    this->height= h;
+}
+
+template<class T>
+int Node<T>::getHeight()const{
+    return this->height;
 }
 template<class T>
-T node<T>::getChar()const{
+T Node<T>::getData()const{
     return this->data;
 }

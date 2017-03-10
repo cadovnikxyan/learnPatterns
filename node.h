@@ -3,32 +3,35 @@
 #include <string>
 #include <vector>
 #include <iostream>
-
+#include <list>
 using namespace std;
 
 template<class T>
-class node
+class Node
 {
-		
-    node<T>*    lnext;
-    node<T>*    rnext;
-    T           data;
-    int         weight;
+    private:
+        Node<T>*    lnext;
+        Node<T>*    rnext;
+        T           data;
+        int         height;
+        int         key;
 	
 	public:		
-        node(node<T>* l,node<T>* r);
-        node(T s, int _weight);
-		node();
-	   ~node();		
+        Node(Node<T>* l,Node<T>* r);
+        Node(T s, int _height);
+        Node(T s, int _height, int _key);
+        Node();
+       ~Node();
 		
-        node<T>*    getLnextNode() const;
-        node<T>*    getRnextNode() const;
-        int         getWeight()const;
-        T           getChar()const;
+        Node<T>*    getLnextNode() const;
+        Node<T>*    getRnextNode() const;
+        int         getHeight()const;
+        T           getData()const;
 		
-        void        setLNext(node<T>* n);
-        void        setRNext(node<T>* n);
+        void        setLNext(Node<T>* n);
+        void        setRNext(Node<T>* n);
         void        setData(T* s);
+        void        setHeight(int h);
 
 
 };

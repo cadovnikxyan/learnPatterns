@@ -7,6 +7,11 @@ CompositeUnit *Unit::getComposite()
     return nullptr;
 }
 
+Unit::~Unit()
+{
+
+}
+
 void CompositeUnit::addUnit(Unit *p)
 {
     c.push_back(p);
