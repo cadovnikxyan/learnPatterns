@@ -6,29 +6,29 @@
 
 using namespace std;
 
-
+template<class T>
 class node
 {
 		
-	node* lnext;
-	node* rnext;
-	char  symbol;
-	int   weight;
+    node<T>*    lnext;
+    node<T>*    rnext;
+    T           data;
+    int         weight;
 	
 	public:		
-		node(node* l,node* r);
-		node(char s, int _weight);
+        node(node<T>* l,node<T>* r);
+        node(T s, int _weight);
 		node();
 	   ~node();		
 		
-		node* getLnextNode() const;
-		node* getRnextNode() const;
-		int   getWeight()const;
-		char  getChar()const;
+        node<T>*    getLnextNode() const;
+        node<T>*    getRnextNode() const;
+        int         getWeight()const;
+        T           getChar()const;
 		
-		void  setLNext(node* n);
-		void  setRNext(node* n);
-		void  setChar(char* s);
+        void        setLNext(node<T>* n);
+        void        setRNext(node<T>* n);
+        void        setData(T* s);
 
 
 };
