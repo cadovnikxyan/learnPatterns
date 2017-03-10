@@ -34,6 +34,7 @@ class tree
     void                        writeTree(ofstream& stream);
 	
     node<char>*                 getRoot() const;
+
 	
 };
 
