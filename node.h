@@ -26,6 +26,7 @@ class Node
         Node<T>*    getLnextNode() const;
         Node<T>*    getRnextNode() const;
         int         getHeight()const;
+        int         getKey() const;
         T           getData()const;
 		
         void        setLNext(Node<T>* n);

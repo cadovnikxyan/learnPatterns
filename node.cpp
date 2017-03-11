@@ -1,5 +1,6 @@
 #include "node.h"
 
+
 template<class T>
 Node<T>::Node(Node<T>* l, Node<T>* r):lnext(l),rnext(r)
   ,height(l->getHeight()+r->getHeight()),data(0)
@@ -23,7 +24,7 @@ Node<T>::Node(T s, int _height, int _key):lnext(nullptr),rnext(nullptr)
 
 template<class T>
 Node<T>::Node():lnext(nullptr),rnext(nullptr)
-  ,data(0),height(0)
+  ,data(0),height(0),key(0)
 {
 
 }
@@ -66,4 +67,10 @@ int Node<T>::getHeight()const{
 template<class T>
 T Node<T>::getData()const{
     return this->data;
+}
+
+template<class T>
+int Node<T>::getKey() const
+{
+    return this->key;
 }

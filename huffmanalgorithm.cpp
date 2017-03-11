@@ -5,7 +5,7 @@
 HuffmanAlgorithm::HuffmanAlgorithm(QWidget *parent):QDialog(parent)
 {
     setModal(true);
-    resize(300,400);
+    resize(300,100);
     lineEdit = new QLineEdit(this);
     vblayout = new QVBoxLayout(this);
     hblyaout = new QHBoxLayout(this);
