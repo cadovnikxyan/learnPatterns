@@ -1,5 +1,5 @@
 #include "findalgorithms.h"
-
+#include <QDebug>
 
 
 template<class T>
@@ -42,7 +42,7 @@ void BinaryTree<T>::remove(Node<T>* n, int key)
 }
 
 template<class T>
-void BinaryTree<T>::find(const int &key)
+void BinaryTree<T>::find(int key)
 {
 
 }
@@ -52,14 +52,14 @@ template<class T>
 bool BinaryTree<T>::isBST(const Node<T> *root)
 {
     static Node<T>* parent = nullptr;
-    if(root){
+    if(root!=nullptr){
         if(!isBST(root->getLnextNode())){
             return false;
         }
         if(parent!=nullptr && root->getData() <= parent->getData()){
             return false;
         }
-        parent = root;
+        parent = const_cast<Node<T>*>(root);
         return isBST(root->getRnextNode());
     }
     return true;

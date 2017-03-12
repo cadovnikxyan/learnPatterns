@@ -7,13 +7,13 @@
 
 template<class T>
 class BinaryTree{
-
     std::list<Node<T> >     tree;
+
 public:
-    BinaryTree();
+    BinaryTree(){}
     void insert(const Node<T> *n, T data, int key);
     void remove(Node<T> *n, int key);
-    void find(const int& key);
+    void find(int key);
     bool isBST(const Node<T>* root);
     void sortTree(Node<T>* root);
 private:

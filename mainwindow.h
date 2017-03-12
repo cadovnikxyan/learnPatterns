@@ -31,6 +31,7 @@ private:
     void templateMethod();
     void decorator();
     void archive();
+    void binaryTree();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

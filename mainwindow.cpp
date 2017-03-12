@@ -15,6 +15,9 @@
 
 #include "templatemethod.h"
 
+#include "findalgorithms.h"
+#include "findalgorithms.cpp"
+
 #include <functional>
 
 
@@ -46,6 +49,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox->addItem("Хаффман",6);
     patterns.push_back(&MainWindow::archive);
+
+    ui->comboBox->addItem("Бинарные деревья",7);
+    patterns.push_back(&MainWindow::binaryTree);
 }
 
 MainWindow::~MainWindow()
@@ -157,6 +163,25 @@ void MainWindow::archive()
     HuffmanAlgorithm* h = new HuffmanAlgorithm(this);
     h->exec();
     delete h;
+
+}
+
+void MainWindow::binaryTree()
+{
+    Node<int>* root= new Node<int>(10,0);
+    root->setLNext(new Node<int>(8,0));
+    root->getLnextNode()->setLNext(new Node<int>(6,0));
+    root->getLnextNode()->setRNext(new Node<int>(4,0));
+    root->getLnextNode()->getLnextNode()->setLNext(new Node<int>(5,0));
+    root->setRNext(new Node<int>(11,0));
+//    root->getRnextNode()->setRNext(new Node<int>(12,0));
+//    root->getRnextNode()->setLNext(new Node<int>(11,0));
+    BinaryTree<int>* t= new BinaryTree<int>();
+    if(t->isBST(root)){
+        ui->listWidget->addItem("true");
+    }else{
+        ui->listWidget->addItem("false");
+    }
 
 }
 
