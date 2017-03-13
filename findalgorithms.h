@@ -11,8 +11,8 @@ class BinaryTree{
     Node<T>*                 root;
 public:
     BinaryTree(Node<T>* root_);
-    Node<T> *insertAVL(Node<T> *n, T data, int key);
-    Node<T> *insert(Node<T> *n, T data, int key);
+    Node<T> *insertAVL(Node<T> *n, T data);
+    Node<T> *insert(Node<T> *n, T data);
     Node<T> *remove(Node<T> *n, int key);
     Node<T>* find(Node<T> *n, T key);
     bool isBST();

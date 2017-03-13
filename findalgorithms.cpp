@@ -9,20 +9,20 @@ BinaryTree<T>::BinaryTree(Node<T> *root_):root(root){
 
 
 template<class T>
-Node<T>* BinaryTree<T>::insertAVL(Node<T> *n,T data, int key)
+Node<T>* BinaryTree<T>::insertAVL(Node<T> *n,T data)
 {
     if(n==nullptr){
         auto node =new Node<T>(data);/*костыль  конструктор Node<T> для root, key неопределен*/
         tree.push_back(node);
         return node;
     }
-    if(key < n->getKey()){
+    if(data < n->getData()){
        auto lnode = n->getLnextNode();
-       lnode = insertAVL(n->getLnextNode(),data,key);
+       lnode = insertAVL(n->getLnextNode(),data);
        n->setLNext(lnode);
     }else{
        auto rnode = n->getRnextNode();
-       rnode = insertAVL(n->getRnextNode(),data,key);
+       rnode = insertAVL(n->getRnextNode(),data);
        n->setRNext(rnode);
     }
     return balance(n);
@@ -30,19 +30,19 @@ Node<T>* BinaryTree<T>::insertAVL(Node<T> *n,T data, int key)
 
 
 template<class T>
-Node<T>* BinaryTree<T>::insert(Node<T> *n,T data, int key)
+Node<T>* BinaryTree<T>::insert(Node<T> *n,T data)
 {
     if(n==nullptr){
-        auto node =new Node<T>(data);/*костыль  конструктор Node<T> для root, key неопределен*/
+        auto node =new Node<T>(data);
         tree.push_back(node);
         return node;
     }
-    if(key < n->getKey()){
+    if(data < n->getData()){
        auto lnode = n->getLnextNode();
-       lnode = insert(n->getLnextNode(),data,key);
+       lnode = insert(n->getLnextNode(),data);
     }else{
        auto rnode = n->getRnextNode();
-       rnode = insert(n->getRnextNode(),data,key);
+       rnode = insert(n->getRnextNode(),data);
     }
     return n;
 }
@@ -180,11 +180,13 @@ template<class T>
 Node<T> *BinaryTree<T>::rotateRight(Node<T> *n)
 {
     Node<T>* q = n->getLnextNode();
+
     auto lnode = n->getLnextNode();
     lnode = q->getRnextNode();
 
     auto rnode = q->getRnextNode();
     rnode = n;
+
     fixHeight(n);
     fixHeight(q);
     return q;

@@ -192,7 +192,7 @@ void MainWindow::binaryTree()
     BinaryTree<int>* t= new BinaryTree<int>(root);
     int keys[]= {15,10,20,8,12,16,25};
     for( auto key : keys){
-       root = t->insertAVL(root,key,key);
+       root = t->insertAVL(root,key);
     }
         ui->listWidget->addItem(QString("tree size = ")+ QString::number(t->getLenght()));
         auto lnode = root->getLnextNode();
