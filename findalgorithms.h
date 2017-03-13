@@ -8,14 +8,15 @@
 template<class T>
 class BinaryTree{
     std::list<Node<T>* >     tree;
-
+    Node<T>*                 root;
 public:
-    BinaryTree(){}
+    BinaryTree(Node<T>* root_);
     Node<T> *insertAVL(Node<T> *n, T data, int key);
     Node<T> *insert(Node<T> *n, T data, int key);
     Node<T> *remove(Node<T> *n, int key);
-    Node<T>* find(int key);
-    bool isBST(Node<T> *root);
+    Node<T>* find(Node<T> *n, T key);
+    bool isBST();
+    bool isBST(Node<T>* root);
     void sortTree(Node<T>* root);
     size_t getLenght();
     QStringList toString(Node<T>* n);

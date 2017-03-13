@@ -3,6 +3,12 @@
 
 
 template<class T>
+BinaryTree<T>::BinaryTree(Node<T> *root_):root(root){
+
+}
+
+
+template<class T>
 Node<T>* BinaryTree<T>::insertAVL(Node<T> *n,T data, int key)
 {
     if(n==nullptr){
@@ -67,14 +73,40 @@ Node<T>* BinaryTree<T>::remove(Node<T>* n, int key)
 }
 
 template<class T>
-Node<T> *BinaryTree<T>::find(int key)
+Node<T> *BinaryTree<T>::find(Node<T>* n,T key)
 {
-
+    if(n==nullptr){
+        return nullptr;
+    }
+    if(n->getData() == key){
+        return n;
+    }else if(key > n->getData()){
+        return find(n->getRnextNode(),key);
+    }else{
+        return find(n->getLnextNode(),key);
+    }
 }
 
 
 template<class T>
-bool BinaryTree<T>::isBST( Node<T> *root)
+bool BinaryTree<T>::isBST()
+{
+    static Node<T>* parent = nullptr;
+    if(root!=nullptr){
+        if(!isBST(root->getLnextNode())){
+            return false;
+        }
+        if(parent!=nullptr && root->getData() <= parent->getData()){
+            return false;
+        }
+        parent = root;
+        return isBST(root->getRnextNode());
+    }
+    return true;
+}
+
+template<class T>
+bool BinaryTree<T>::isBST(Node<T>* root)
 {
     static Node<T>* parent = nullptr;
     if(root!=nullptr){

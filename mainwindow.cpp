@@ -189,7 +189,7 @@ void recusiveT(Node<T>* root,BinaryTree<T>* t, Ui::MainWindow *ui){
 void MainWindow::binaryTree()
 {
     Node<int>* root= nullptr;
-    BinaryTree<int>* t= new BinaryTree<int>();
+    BinaryTree<int>* t= new BinaryTree<int>(root);
     int keys[]= {15,10,20,8,12,16,25};
     for( auto key : keys){
        root = t->insertAVL(root,key,key);
@@ -201,10 +201,16 @@ void MainWindow::binaryTree()
 
     if(t->isBST(root)){
         ui->listWidget->addItem("true");
+        auto k = t->find(root,25);
+        if(k!=nullptr){
+            ui->listWidget->addItem(QString("finded node with data = ")+ QString::number(k->getData()));
+        }else{
+            ui->listWidget->addItem("node is`t find");
+        }
     }else{
         ui->listWidget->addItem("false");
     }
-    recusiveT(root,t,ui);
+
 }
 
 
