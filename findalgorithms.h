@@ -2,20 +2,24 @@
 #define FINDALGORITHMS_H
 #include "node.h"
 #include "node.cpp"
-
+#include <QString>
 
 
 template<class T>
 class BinaryTree{
-    std::list<Node<T> >     tree;
+    std::list<Node<T>* >     tree;
 
 public:
     BinaryTree(){}
-    void insert(const Node<T> *n, T data, int key);
-    void remove(Node<T> *n, int key);
-    void find(int key);
-    bool isBST(const Node<T>* root);
+    Node<T> *insertAVL(Node<T> *n, T data, int key);
+    Node<T> *insert(Node<T> *n, T data, int key);
+    Node<T> *remove(Node<T> *n, int key);
+    Node<T>* find(int key);
+    bool isBST(Node<T> *root);
     void sortTree(Node<T>* root);
+    size_t getLenght();
+    QStringList toString(Node<T>* n);
+
 private:
     int balanceFactor(Node<T>* n);
     void fixHeight(Node<T>* n);

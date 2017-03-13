@@ -20,6 +20,11 @@ Node<T>::Node(T s, int _height, int _key):lnext(nullptr),rnext(nullptr)
 {
 
 }
+template<class T>
+Node<T>::Node(T s):lnext(nullptr),rnext(nullptr),height(1),data(s)
+{
+    key=data;
+}
 
 
 template<class T>
@@ -33,44 +38,44 @@ Node<T>::~Node(){
 	
 }
 template<class T>
-Node<T>* Node<T>::getLnextNode() const{
-	return this->lnext;
+Node<T>* Node<T>::getLnextNode() {
+    return lnext;
 }
 template<class T>
-Node<T>* Node<T>::getRnextNode() const{
-	return this->rnext;
+Node<T>* Node<T>::getRnextNode() {
+    return rnext;
 }
 template<class T>
 void Node<T>::setLNext(Node<T>* n){
-	this->lnext=n;
+    lnext=n;
 }
 template<class T>
 void Node<T>::setRNext(Node<T>* n){
-	this->rnext=n;
+    rnext=n;
 }
 
 template<class T>
 void Node<T>::setData(T* s){
-    this->data=(*s);
+    data=(*s);
 }
 
 template<class T>
 void Node<T>::setHeight(int h)
 {
-    this->height= h;
+    height= h;
 }
 
 template<class T>
 int Node<T>::getHeight()const{
-    return this->height;
+    return height;
 }
 template<class T>
 T Node<T>::getData()const{
-    return this->data;
+    return data;
 }
 
 template<class T>
-int Node<T>::getKey() const
+T Node<T>::getKey() const
 {
-    return this->key;
+    return getData();
 }

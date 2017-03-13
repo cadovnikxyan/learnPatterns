@@ -3,21 +3,46 @@
 
 
 template<class T>
-void BinaryTree<T>::insert(const Node<T> *n,T data, int key)
+Node<T>* BinaryTree<T>::insertAVL(Node<T> *n,T data, int key)
 {
-    if(!n){
-        return new Node<T>(data,0,key);
+    if(n==nullptr){
+        auto node =new Node<T>(data);/*костыль  конструктор Node<T> для root, key неопределен*/
+        tree.push_back(node);
+        return node;
     }
-    if(key< n.getKey()){
-        n->getLnextNode()=insert(n->getLnextNode(),data,key);
+    if(key < n->getKey()){
+       auto lnode = n->getLnextNode();
+       lnode = insertAVL(n->getLnextNode(),data,key);
+       n->setLNext(lnode);
     }else{
-        n->getRnextNode()=insert(n->getRnextNode(),data,key);
+       auto rnode = n->getRnextNode();
+       rnode = insertAVL(n->getRnextNode(),data,key);
+       n->setRNext(rnode);
     }
     return balance(n);
 }
 
+
 template<class T>
-void BinaryTree<T>::remove(Node<T>* n, int key)
+Node<T>* BinaryTree<T>::insert(Node<T> *n,T data, int key)
+{
+    if(n==nullptr){
+        auto node =new Node<T>(data);/*костыль  конструктор Node<T> для root, key неопределен*/
+        tree.push_back(node);
+        return node;
+    }
+    if(key < n->getKey()){
+       auto lnode = n->getLnextNode();
+       lnode = insert(n->getLnextNode(),data,key);
+    }else{
+       auto rnode = n->getRnextNode();
+       rnode = insert(n->getRnextNode(),data,key);
+    }
+    return n;
+}
+
+template<class T>
+Node<T>* BinaryTree<T>::remove(Node<T>* n, int key)
 {
     if(!n){
         return nullptr;
@@ -42,14 +67,14 @@ void BinaryTree<T>::remove(Node<T>* n, int key)
 }
 
 template<class T>
-void BinaryTree<T>::find(int key)
+Node<T> *BinaryTree<T>::find(int key)
 {
 
 }
 
 
 template<class T>
-bool BinaryTree<T>::isBST(const Node<T> *root)
+bool BinaryTree<T>::isBST( Node<T> *root)
 {
     static Node<T>* parent = nullptr;
     if(root!=nullptr){
@@ -59,7 +84,7 @@ bool BinaryTree<T>::isBST(const Node<T> *root)
         if(parent!=nullptr && root->getData() <= parent->getData()){
             return false;
         }
-        parent = const_cast<Node<T>*>(root);
+        parent = root;
         return isBST(root->getRnextNode());
     }
     return true;
@@ -70,11 +95,39 @@ void BinaryTree<T>::sortTree(Node<T> *root)
 {
 
 }
+template<class T>
+size_t BinaryTree<T>::getLenght()
+{
+    return tree.size();
+}
+
+template<class T>
+QStringList BinaryTree<T>::toString(Node<T> *n)
+{
+    QString str;
+    QStringList list;
+    if(n!=nullptr && n->getData()!=0){
+        str="\t\t" + QString::number(n->getData());
+        list.append(str);
+    } else{
+        return list;
+    }
+    if(n->getLnextNode()!= nullptr ){
+        str=""+QString::number(n->getLnextNode()->getData());
+        list.append(str);
+    }
+    if(n->getRnextNode()!= nullptr){
+        str="\t\t\t\t"+QString::number(n->getRnextNode()->getData());
+        list.append(str);
+    }
+
+     return list;
+}
 
 template<class T>
 int BinaryTree<T>::balanceFactor(Node<T> *n)
 {
-    return n->getRnextNode()->getHeight() - n->getLnextNode()->getHeight();
+    return height(n->getRnextNode())- height(n->getLnextNode());
 }
 
 template<class T>
@@ -95,8 +148,11 @@ template<class T>
 Node<T> *BinaryTree<T>::rotateRight(Node<T> *n)
 {
     Node<T>* q = n->getLnextNode();
-    n->getLnextNode()=q->getRnextNode();
-    q->getRnextNode()=n;
+    auto lnode = n->getLnextNode();
+    lnode = q->getRnextNode();
+
+    auto rnode = q->getRnextNode();
+    rnode = n;
     fixHeight(n);
     fixHeight(q);
     return q;
@@ -108,13 +164,15 @@ Node<T> *BinaryTree<T>::balance(Node<T> *n)
     fixHeight(n);
     if(balanceFactor(n)==2){
         if(balanceFactor(n->getRnextNode())<0){
-            n->getRnextNode()=rotateRight(n->getRnextNode());
+            auto rnode = n->getRnextNode();
+            rnode = rotateRight(n->getRnextNode());
         }
         return rotateLeft(n);
     }
     if(balanceFactor(n)==-2){
         if(balanceFactor(n->getLnextNode())>0){
-            n->getLnextNode()=rotateLeft(n->getLnextNode());
+           auto lnode = n->getLnextNode();
+           lnode = rotateLeft(n->getLnextNode());
         }
         return rotateRight(n);
     }
@@ -141,8 +199,10 @@ template<class T>
 Node<T> *BinaryTree<T>::rotateLeft(Node<T> *n)
 {
     Node<T>* q = n->getRnextNode();
-    n->getRnextNode()=q->getLnextNode();
-    q->getLnextNode()=n;
+    auto rnode = n->getRnextNode();
+    rnode = q->getLnextNode();
+    auto lnode = q->getLnextNode();
+    lnode =n;
     fixHeight(q);
     fixHeight(n);
     return q;

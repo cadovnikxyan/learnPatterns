@@ -19,7 +19,7 @@
 #include "findalgorithms.cpp"
 
 #include <functional>
-
+#include <utility>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -166,24 +166,48 @@ void MainWindow::archive()
 
 }
 
+template<class T>
+void recusiveT(Node<T>* root,BinaryTree<T>* t, Ui::MainWindow *ui){
+    if(root==nullptr){
+        return;
+    }
+    auto lnode = root->getLnextNode();
+    auto rnode = root->getRnextNode();
+
+    ui->listWidget->addItems(t->toString(root));
+
+    if(lnode!=nullptr){
+        ui->listWidget->addItems(t->toString(lnode));
+        recusiveT(lnode,t,ui);
+    }
+    if(rnode!=nullptr){
+        ui->listWidget->addItems(t->toString(rnode));
+        recusiveT(rnode,t,ui);
+    }
+}
+
 void MainWindow::binaryTree()
 {
-    Node<int>* root= new Node<int>(10,0);
-    root->setLNext(new Node<int>(8,0));
-    root->getLnextNode()->setLNext(new Node<int>(6,0));
-    root->getLnextNode()->setRNext(new Node<int>(4,0));
-    root->getLnextNode()->getLnextNode()->setLNext(new Node<int>(5,0));
-    root->setRNext(new Node<int>(11,0));
-//    root->getRnextNode()->setRNext(new Node<int>(12,0));
-//    root->getRnextNode()->setLNext(new Node<int>(11,0));
+    Node<int>* root= nullptr;
     BinaryTree<int>* t= new BinaryTree<int>();
+    int keys[]= {15,10,20,8,12,16,25};
+    for( auto key : keys){
+       root = t->insertAVL(root,key,key);
+    }
+        ui->listWidget->addItem(QString("tree size = ")+ QString::number(t->getLenght()));
+        auto lnode = root->getLnextNode();
+        auto rnode = root->getRnextNode();
+        std::swap(lnode,rnode);
+
     if(t->isBST(root)){
         ui->listWidget->addItem("true");
     }else{
         ui->listWidget->addItem("false");
     }
-
+    recusiveT(root,t,ui);
 }
+
+
 
 CompositeUnit *createLegion()
 {

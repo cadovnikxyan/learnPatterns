@@ -20,13 +20,14 @@ class Node
         Node(Node<T>* l,Node<T>* r);
         Node(T s, int _height);
         Node(T s, int _height, int _key);
+        Node(T s);
         Node();
        ~Node();
 		
-        Node<T>*    getLnextNode() const;
-        Node<T>*    getRnextNode() const;
+        Node<T>*    getLnextNode() ;
+        Node<T>*    getRnextNode() ;
         int         getHeight()const;
-        int         getKey() const;
+        T           getKey() const;
         T           getData()const;
 		
         void        setLNext(Node<T>* n);
