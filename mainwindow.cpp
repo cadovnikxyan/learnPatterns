@@ -20,6 +20,8 @@
 
 #include "singlton.h"
 
+#include "threadspatterns.h"
+
 #include <functional>
 #include <utility>
 
@@ -224,7 +226,27 @@ void MainWindow::binaryTree()
 
 void MainWindow::threads()
 {
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
 
+    scheduling::Scheduler<std::chrono::steady_clock> s;
+    s.schedule([&s,&adapter]{adapter.output("Task1");}
+    ,std::chrono::steady_clock::now());
+
+
+    s.schedule([&s,&adapter]{adapter.output("Task2");}
+    ,std::chrono::steady_clock::now()
+    +std::chrono::seconds(2)
+    ,std::chrono::seconds(2));
+
+    s.schedule([&s,&adapter]{adapter.output("Task3");}
+    ,std::chrono::steady_clock::now()
+    +std::chrono::seconds(2)
+    ,std::chrono::seconds(2));
+
+    s.schedule([&s,&adapter]{adapter.output("Task4");}
+    ,std::chrono::steady_clock::now()
+    +std::chrono::seconds(2)
+    ,std::chrono::seconds(2));
 }
 
 void MainWindow::singlton()

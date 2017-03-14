@@ -1,5 +1,5 @@
 #include "ui_bridge.h"
-
+#include <mutex>
 UI_Bridge::UI_Bridge(QLineEdit *input, QListWidget* output):lineEdit(input),listWidget(output)
 {
 
@@ -17,5 +17,7 @@ QString UI_Bridge::getInput()
 
 void UI_Bridge::output(const QString &str)
 {
+    static std::mutex m;
+    std::lock_guard<std::mutex> lock(m);
     listWidget->addItem(str);
 }
