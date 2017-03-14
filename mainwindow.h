@@ -32,6 +32,8 @@ private:
     void decorator();
     void archive();
     void binaryTree();
+    void threads();
+    void singlton();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

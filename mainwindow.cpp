@@ -18,6 +18,8 @@
 #include "findalgorithms.h"
 #include "findalgorithms.cpp"
 
+#include "singlton.h"
+
 #include <functional>
 #include <utility>
 
@@ -52,6 +54,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->comboBox->addItem("Бинарные деревья",7);
     patterns.push_back(&MainWindow::binaryTree);
+
+    ui->comboBox->addItem("Потоки",8);
+    patterns.push_back(&MainWindow::threads);
+
+    ui->comboBox->addItem("Синглтон",9);
+    patterns.push_back(&MainWindow::singlton);
+
 }
 
 MainWindow::~MainWindow()
@@ -211,6 +220,18 @@ void MainWindow::binaryTree()
         ui->listWidget->addItem("false");
     }
 
+}
+
+void MainWindow::threads()
+{
+
+}
+
+void MainWindow::singlton()
+{
+    QString str = "singlton";
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
+    Singlton<QString>::instance(&str).print(&adapter);
 }
 
 

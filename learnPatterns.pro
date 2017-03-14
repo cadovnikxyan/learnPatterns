@@ -40,7 +40,9 @@ SOURCES += main.cpp\
     node.cpp \
     tree.cpp \
     mainArch.cpp \
-    huffmanalgorithm.cpp
+    huffmanalgorithm.cpp \
+    threadspatterns.cpp \
+    singlton.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -68,7 +70,9 @@ HEADERS  += mainwindow.h \
     findalgorithms.h \
     node.h \
     tree.h \
-    huffmanalgorithm.h
+    huffmanalgorithm.h \
+    threadspatterns.h \
+    singlton.h
 
 FORMS    += mainwindow.ui
 LIBS+= -lboost_system
