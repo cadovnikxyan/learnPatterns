@@ -15,9 +15,9 @@
 #include  <algorithm>
 //#include <pthread.h>
 namespace scheduling{
-    template<class C>
+    template<class Clock>
     class Scheduler{
-        typedef C clock_type;
+        typedef Clock clock_type;
         typedef typename clock_type::time_point time_point;
         typedef typename clock_type::duration duration;
         typedef std::function<void()> task_type;
@@ -66,7 +66,6 @@ namespace scheduling{
             return handle_;
         }
         task_handle schedule(task_type&& task
-                             , const time_point& start
                              , const duration& delay=duration::zero()
                              , const duration& repeat=duration::zero()){
         return schedule(std::move(task),clock_type::now()+delay,repeat);

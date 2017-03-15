@@ -232,7 +232,6 @@ void MainWindow::threads()
     s.schedule([&s,&adapter]{adapter.output("Task1");}
     ,std::chrono::steady_clock::now());
 
-
     s.schedule([&s,&adapter]{adapter.output("Task2");}
     ,std::chrono::steady_clock::now()
     +std::chrono::seconds(2)
@@ -243,10 +242,11 @@ void MainWindow::threads()
     +std::chrono::seconds(2)
     ,std::chrono::seconds(2));
 
-    s.schedule([&s,&adapter]{adapter.output("Task4");}
+    s.schedule([&s,&adapter]{adapter.output("Task4"); s.halt();}
     ,std::chrono::steady_clock::now()
-    +std::chrono::seconds(2)
-    ,std::chrono::seconds(2));
+    +std::chrono::seconds(5));
+
+    s.run();
 }
 
 void MainWindow::singlton()
