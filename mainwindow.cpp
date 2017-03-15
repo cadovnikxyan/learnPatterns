@@ -75,7 +75,10 @@ void MainWindow::on_Start_clicked()
 {
     int data = ui->comboBox->currentData().toInt();
     if(data<patterns.size()){
-        (this->*(patterns[data]))();
+        std::thread tr(
+        patterns[data],this
+                    );
+        tr.detach();
     }
 }
 
@@ -226,6 +229,7 @@ void MainWindow::binaryTree()
 
 void MainWindow::threads()
 {
+    qDebug()<<"thread func";
     UI_Bridge adapter(ui->lineEdit,ui->listWidget);
 
     scheduling::Scheduler<std::chrono::steady_clock> s;

@@ -121,7 +121,7 @@ namespace scheduling{
                 }
             }
             for(auto& t : threads){
-                t.join();
+                t.detach();
             }
         }
 
