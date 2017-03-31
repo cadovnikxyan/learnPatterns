@@ -49,7 +49,7 @@ void HuffmanAlgorithm::archiving()
     qDebug()<<inFileName;
     outFileName= getOutFileName();
     qDebug()<<outFileName;
-    if((!inFileName.isEmpty())&&(!outFileName.isEmpty())){
+    if( (!inFileName.isEmpty()) && (!outFileName.isEmpty()) ){
        file = new QFile(inFileName);
        file->open(QIODevice::ReadOnly);
        t = new tree(std::move(file->readAll().toStdString()));
@@ -63,7 +63,7 @@ void HuffmanAlgorithm::archiving()
        int count=0;
        for(auto x : t->getCode()){
            for(auto n : x.second){
-               buf |= x.second[n]<<(7-count++);
+               buf |= n<<(7-count++);
                if(count>7){
                    instream->operator<<(buf);
                    buf=0;
@@ -77,7 +77,4 @@ void HuffmanAlgorithm::archiving()
        t->printTree();
        delete t;
     }
-
-
-
 }

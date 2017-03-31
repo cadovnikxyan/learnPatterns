@@ -22,5 +22,5 @@ void UI_Bridge::output(const QString &str)
 {
     static std::mutex m;
     std::lock_guard<std::mutex> lock(m);
-    listWidget->addItem(QString( "0x%1" ).arg( (long long) QThread::currentThreadId(), 16 ) +" "+ str);
+    listWidget->addItem(/*QString( "0x%1" ).arg( (long long) QThread::currentThreadId(), 16 ) +" "+*/ str);
 }

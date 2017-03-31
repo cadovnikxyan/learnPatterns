@@ -19,7 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private slots:
+private Q_SLOTS:
     void on_Start_clicked();
 
 private:
@@ -34,6 +34,7 @@ private:
     void binaryTree();
     void threads();
     void singlton();
+    void python();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

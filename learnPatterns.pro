@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     mainArch.cpp \
     huffmanalgorithm.cpp \
     threadspatterns.cpp \
-    singlton.cpp
+    singlton.cpp \
+    pyrun.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -72,8 +73,24 @@ HEADERS  += mainwindow.h \
     tree.h \
     huffmanalgorithm.h \
     threadspatterns.h \
-    singlton.h
+    singlton.h \
+    pyrun.h
 
 FORMS    += mainwindow.ui
-LIBS+= -lboost_system
-QMAKE_CXXFLAGS="-std=gnu++14"
+LIBS     += -lboost_system
+
+INCLUDEPATH += /usr/include/python3.5m
+
+LIBS += -L/usr/lib/x86_64-linux-gnu
+
+LIBS += -Wl,-Bstatic -lpython3.5m -Wl,-Bdynamic
+
+LIBS += -lz -lexpat -ldl -lutil
+
+#QMAKE_CXXFLAGS="-std=gnu++14"
+
+DISTFILES += \
+    PyTest.py \
+    PyTest.py.codeobj
+
+CONFIG += no_keywords c++14

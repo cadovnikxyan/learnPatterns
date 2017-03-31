@@ -25,6 +25,8 @@
 #include <functional>
 #include <utility>
 
+#include <pyrun.h>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -63,6 +65,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("Синглтон",9);
     patterns.push_back(&MainWindow::singlton);
 
+    ui->comboBox->addItem("Питон",10);
+    patterns.push_back(&MainWindow::python);
+
 }
 
 MainWindow::~MainWindow()
@@ -74,10 +79,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_Start_clicked()
 {
     int data = ui->comboBox->currentData().toInt();
+    if(data==6){
+        (this->*(patterns[data]))();
+        return;
+    }
     if(data<patterns.size()){
-        std::thread tr(
-        patterns[data],this
-                    );
+        std::thread tr(patterns[data],this);
         tr.detach();
     }
 }
@@ -174,7 +181,7 @@ void MainWindow::decorator()
 
 void MainWindow::archive()
 {
-    HuffmanAlgorithm* h = new HuffmanAlgorithm(this);
+    HuffmanAlgorithm* h = new HuffmanAlgorithm(0);
     h->exec();
     delete h;
 
@@ -229,7 +236,6 @@ void MainWindow::binaryTree()
 
 void MainWindow::threads()
 {
-    qDebug()<<"thread func";
     UI_Bridge adapter(ui->lineEdit,ui->listWidget);
 
     scheduling::Scheduler<std::chrono::steady_clock> s;
@@ -258,6 +264,13 @@ void MainWindow::singlton()
     QString str = "singlton";
     UI_Bridge adapter(ui->lineEdit,ui->listWidget);
     Singlton<QString>::instance(&str).print(&adapter);
+}
+
+void MainWindow::python()
+{
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
+    QSharedPointer<PyRun> p { new PyRun("PyTest.py",&adapter)};
+//    delete p;
 }
 
 

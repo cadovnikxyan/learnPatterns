@@ -76,9 +76,10 @@ namespace scheduling{
             {
                 std::lock_guard<std::mutex> lock(mutex);
                 auto handle_it = std::find(handles.begin(),handles.end(),handle);
+                auto todo_it = std::find(todo.begin(),todo.end(),handle);
                 if(handle_it != handles.end()){
                     tasks.erase(handle);
-                    todo.remove(handle);
+                    todo.erase(todo_it,todo_it);
                     handles.erase(handle_it);
                 }
             }

@@ -15,27 +15,39 @@ class Node
         T           data;
         int         height;
         int         key;
-	
+
 	public:		
-        Node(Node<T>* l,Node<T>* r);
-        Node(T s, int _height);
-        Node(T s, int _height, int _key);
-        Node(T s);
-        Node();
-       ~Node();
-		
-        Node<T>*    getLnextNode() ;
-        Node<T>*    getRnextNode() ;
-        int         getHeight()const;
-        T           getKey() const;
-        T           getData()const;
-		
-        void        setLNext(Node<T>* n);
-        void        setRNext(Node<T>* n);
-        void        setData(T* s);
-        void        setHeight(int h);
+        Node(Node<T>* l,Node<T>* r):lnext(l),rnext(r)
+          ,height(l->getHeight()+r->getHeight()),data(0){}
 
+        Node(T s, int _height):lnext(nullptr),rnext(nullptr)
+          ,data(s),height(_height){}
 
+        Node(T s, int _height, int _key):lnext(nullptr),rnext(nullptr)
+          ,height(_height),key(key){}
+
+        Node(T s):lnext(nullptr),rnext(nullptr),height(1),data(s){key=data;}
+
+        Node():lnext(nullptr),rnext(nullptr)
+          ,data(0),height(0),key(0){}
+
+       ~Node(){delete lnext;
+               delete rnext;}
+		
+        Node<T>*    getLnextNode()  {return lnext;}
+        Node<T>*    getRnextNode()  {return rnext;}
+        int         getHeight()     {return height;} const
+        T           getKey()        {return key;}    const
+        T           getData()       {return data;}   const
+		
+        void        setLNext(Node<T>* n){lnext=n;}
+        void        setRNext(Node<T>* n){rnext=n;}
+        void        setData(T* s){data=(*s);}
+        void        setHeight(int h){height=h;}
+
+        bool operator()(const Node<T>* l, const Node<T>* r) const{
+         return l->getHeight() < r->getHeight();
+        }
 };
 
 #endif

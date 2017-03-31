@@ -17,7 +17,6 @@ class tree
     map<char, vector<bool> >    tcode;
     vector<bool>                code;
 	
-    void                        createDic(string* str);
     void                        createTree(list<Node<char> * > &__tree );
     void                        buildCodeTable(Node<char>* _root);
 	
@@ -25,13 +24,13 @@ class tree
 		
                                 tree(map<char,int>& _dic);
                                 tree(string* str);
-                                tree(string &&str);
+                                tree(string&& str);
                                ~tree();
 				
     void                        printTree();
     map<char,vector<bool> >&    getCode();
     void                        writeTree();
-    void                        writeTree(ofstream& stream);
+    void                        writeTree(ofstream &stream);
 	
     Node<char>*                 getRoot() const;
 

@@ -1,5 +1,5 @@
 #include "tree.h"
-#include "node.cpp"
+
 
 
 tree::tree(map<char,int>& _dic){
@@ -12,23 +12,22 @@ tree::tree(map<char,int>& _dic){
 
 tree::tree(string* str){
 	
-    auto its=str->begin();
-		for(;its!=str->end();++its){					
-				dic[*its]++;				
-		}	
-    for(auto it= dic.begin();it!= dic.end();++it){
-        _tree.push_back(new Node<char>(it->first,it->second));
-	}
+    for(auto its=str->begin();its!=str->end();++its){
+            dic[*its]++;
+    }
+    for(auto it : dic){
+        _tree.push_back(new Node<char>(it.first,it.second));
+    }
 	createTree(_tree);
 }
 tree::tree(string&& str){
 
-    auto its=str.begin();
-        for(;its!=str.end();++its){
-                dic[*its]++;
-        }
-    for(auto it= dic.begin();it!= dic.end();++it){
-        _tree.push_back(new Node<char>(it->first,it->second));
+
+    for(auto its=str.begin();its!=str.end();++its){
+            dic[*its]++;
+    }
+    for(auto it : dic){
+        _tree.push_back(new Node<char>(it.first,it.second));
     }
     createTree(_tree);
 }
@@ -38,37 +37,34 @@ tree::~tree(){
 
 
 void tree::printTree(){
-        auto itc=tcode.begin();
-		for(;itc!=tcode.end();++itc){
-			cout<<itc->first<<endl;
-			vector<bool> b=itc->second;
-            for(auto i=0;i<b.size();++i){
-				cout<<b[i];
-			}
-			cout<<endl;
+        for(auto itc : tcode){
+            cout<<itc.first<<endl;
+            vector<bool> b=itc.second;
+            for(auto i : b) cout<<i;
+            cout<<endl;
 		}
 }
 
-struct MyCompare
-{
-    bool operator()(const Node<char>* l, const Node<char>* r) const{
-	 return l->getHeight() < r->getHeight();
-	}
-};
+//struct MyCompare
+//{
+//    bool operator()(const Node<char>* l, const Node<char>* r) const{
+//	 return l->getHeight() < r->getHeight();
+//	}
+//};
 
 void tree::createTree(list<Node<char>*>& __tree ){
 	
 	while(__tree.size()!=1){
 		
-		__tree.sort(MyCompare());
+        __tree.sort();
 		
         Node<char>* l=__tree.front();
 		__tree.pop_front();
+
         Node<char>* r=__tree.front();
 		__tree.pop_front();
 		
-        Node<char>* p= new Node<char>(l,r);
-					
+        Node<char>* p= new Node<char>(l,r);				
 		__tree.push_back(p);
 						
 	}		
@@ -106,13 +102,13 @@ map<char,vector<bool> >& tree::getCode(){
 
 void tree::writeTree(){
 	ofstream t("output.tree",ios::out);
-		map<char, vector<bool> >::iterator it= tcode.begin();
+       auto it = tcode.begin();  /*map<char, vector<bool> >::iterator*/
 			while(it!=tcode.end()){
 				t<<it->first;
 					string str;
 					vector<bool> b=it->second;
-                        for(auto i=0;i<b.size();++i){
-							if(b[i]){
+                        for(auto i : b){
+                            if(i){
 								str+="1";
 							}else{
 								str+="0";
@@ -123,13 +119,13 @@ void tree::writeTree(){
 			}
 }
 void tree::writeTree(ofstream& stream){
-		map<char, vector<bool> >::iterator it= tcode.begin();
+        auto it= tcode.begin();  /*map<char, vector<bool> >::iterator*/
 			while(it!=tcode.end()){
-				stream<<it->first;
+                stream<<it->first;
 					string str;
 					vector<bool> b=it->second;
-                        for(auto i=0;i<b.size();++i){
-							if(b[i]){
+                        for(auto i : b){
+                            if(i){
 								str+="1";
 							}else{
 								str+="0";
@@ -140,13 +136,6 @@ void tree::writeTree(ofstream& stream){
 			}
 }
 
-void tree::createDic(string* str){
-						
-        auto it = str->begin();
-		for(;it!=str->end();++it){					
-				dic[*it]++;				
-		}
-				
-}
+
 
 
