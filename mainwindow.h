@@ -35,6 +35,8 @@ private:
     void threads();
     void singlton();
     void python();
+    void race();
+    void moveContainerFunc();
     void(MainWindow::*pattPtr)();
     QVector<void(MainWindow::*)()> patterns;
 

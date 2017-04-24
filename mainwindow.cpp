@@ -27,6 +27,8 @@
 
 #include <pyrun.h>
 
+#include "moveconstructor.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -68,6 +70,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBox->addItem("Питон",10);
     patterns.push_back(&MainWindow::python);
 
+    ui->comboBox->addItem("Race",11);
+    patterns.push_back(&MainWindow::race);
+
+    ui->comboBox->addItem("moveContainer",12);
+    patterns.push_back(&MainWindow::moveContainerFunc);
 }
 
 MainWindow::~MainWindow()
@@ -270,7 +277,48 @@ void MainWindow::python()
 {
     UI_Bridge adapter(ui->lineEdit,ui->listWidget);
     QSharedPointer<PyRun> p { new PyRun("PyTest.py",&adapter)};
-//    delete p;
+    //    delete p;
+}
+
+void MainWindow::race()
+{
+    scheduling::Scheduler<std::chrono::steady_clock> sch;
+    std::condition_variable v;
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
+    bool fl=true;
+    sch.schedule([&sch,&adapter,&fl]{
+//        for(int i=0;i<10;++i){
+        while(1){
+            if(fl){
+                adapter.output("1");
+                fl=false;
+            }
+        }
+    },std::chrono::steady_clock::now());
+    sch.schedule([&sch,&adapter,&fl]{
+//       for(int i=0;i<10;++i){
+        while(1){
+           if(!fl){
+               adapter.output("2");
+               fl=true;
+           }
+        }
+    sch.halt();
+    },std::chrono::steady_clock::now() +std::chrono::seconds(2),std::chrono::seconds(2));
+    sch.run();
+}
+
+
+void MainWindow::moveContainerFunc()
+{
+    UI_Bridge adapter(ui->lineEdit,ui->listWidget);
+    moveContainer<int> m(&adapter);
+    moveContainer<int> m2=m;
+    m=m2;
+    moveContainer<int> m3(std::move(m));
+    m.info();
+    m3=std::move(m2);
+    m2.info();
 }
 
 

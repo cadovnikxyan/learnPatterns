@@ -45,13 +45,6 @@ void tree::printTree(){
 		}
 }
 
-//struct MyCompare
-//{
-//    bool operator()(const Node<char>* l, const Node<char>* r) const{
-//	 return l->getHeight() < r->getHeight();
-//	}
-//};
-
 void tree::createTree(list<Node<char>*>& __tree ){
 	
 	while(__tree.size()!=1){
@@ -118,6 +111,7 @@ void tree::writeTree(){
 						++it;
 			}
 }
+
 void tree::writeTree(ofstream& stream){
         auto it= tcode.begin();  /*map<char, vector<bool> >::iterator*/
 			while(it!=tcode.end()){

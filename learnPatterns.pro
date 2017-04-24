@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     huffmanalgorithm.cpp \
     threadspatterns.cpp \
     singlton.cpp \
-    pyrun.cpp
+    pyrun.cpp \
+    moveconstructor.cpp
 
 HEADERS  += mainwindow.h \
     warrior.h \
@@ -74,7 +75,8 @@ HEADERS  += mainwindow.h \
     huffmanalgorithm.h \
     threadspatterns.h \
     singlton.h \
-    pyrun.h
+    pyrun.h \
+    moveconstructor.h
 
 FORMS    += mainwindow.ui
 LIBS     += -lboost_system
